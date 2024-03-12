@@ -21,7 +21,6 @@ namespace Wba.FormViewModelExample.Web.ViewModels
         [Required(ErrorMessage = "Size verplicht!")]
         [Display(Name = "Size")]
         public int SelectedSizeId { get; set; }
-
         //multiple dropdown
         public IEnumerable<SelectListItem> ExtraToppings { get; set; }
 

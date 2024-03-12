@@ -17,13 +17,19 @@ namespace Wba.FormViewModelExample.Web.Controllers
         [HttpPost]
         public IActionResult Login(AccountLoginViewModel accountLoginViewModel)
         {
-            if(accountLoginViewModel.UserName.Equals("mil@mil.com")
-                && accountLoginViewModel.Password.Equals("bananaman75"))
+            if (ModelState.IsValid)
             {
-                //redirecten
-                return RedirectToAction("Index","Home");
+
+                if (accountLoginViewModel.UserName.Equals("mil@mil.com")
+                    && accountLoginViewModel.Password.Equals("bananaman75"))
+                {
+                    //redirecten
+                    return RedirectToAction("Index", "Home");
+                }
+                ModelState.AddModelError("", "Wrong credentials!");
             }
-            return View("Error");
+            //we have form errors
+            return View(accountLoginViewModel);
         }
         [HttpGet]
         public IActionResult Register()
@@ -42,7 +48,23 @@ namespace Wba.FormViewModelExample.Web.Controllers
         [HttpPost]
         public IActionResult Register(AccountRegisterViewModel accountRegisterViewModel)
         {
-            return View(accountRegisterViewModel);
+            if(!ModelState.IsValid)
+            {
+                accountRegisterViewModel.Countries
+                     = new List<SelectListItem>
+                {
+                    new SelectListItem {Value = "1", Text = "Italië" },
+                    new SelectListItem {Value = "2", Text = "Portugal" },
+                    new SelectListItem {Value = "3", Text = "Spanje" },
+                };
+                return View(accountRegisterViewModel);
+            }
+            return RedirectToAction("Registered");
+        }
+        [HttpGet]
+        public IActionResult Registered()
+        {
+            return View();
         }
     }
 }

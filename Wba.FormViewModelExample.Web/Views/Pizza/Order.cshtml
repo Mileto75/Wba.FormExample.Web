@@ -2,20 +2,32 @@
 
 <div class="row">
     <div class="col col-lg-4 mx-auto border border-1">
-        <form asp-controller="" asp-action="" method="post">
+        <form asp-controller="Pizza" asp-action="ProcessOrder" method="post">
             <div class="form-group">
-                <label asp-for=""></label>
-                <input asp-for="" class="form-control">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control">
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for=""></label>
-                <input asp-for="" class="form-control">
+                <label asp-for="SelectedPizzaId"></label>
+                <select asp-for="SelectedPizzaId" asp-items="@Model.Pizzas" class="form-select"></select>
+                <span asp-validation-for="SelectedPizzaId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for=""></label>
-                <select asp-for="" asp-items="" class="form-select"></select>
+                <label asp-for="Quantity"></label>
+                <input asp-for="Quantity" class="form-control">
+                <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="form-group">
+                <label asp-for="SelectedSizeId"></label>
+                <select asp-for="SelectedSizeId" asp-items="@Model.Sizes" class="form-select"></select>
+                <span asp-validation-for="SelectedSizeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedExtraToppings"></label>
+                <select asp-for="SelectedExtraToppings" asp-items="@Model.ExtraToppings" class="form-select"></select>
+            </div>
+            <button type="submit" class="btn btn-primary">Bestel</button>
         </form>
     </div>
 </div>
